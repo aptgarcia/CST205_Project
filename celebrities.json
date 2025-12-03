@@ -1,0 +1,18 @@
+{
+  "taylor-swift": {
+    "name": "Taylor Swift",
+    "quotable_author": "Taylor Swift"
+  },
+  "kanye-west": {
+    "name": "Kanye West",
+    "quotable_author": "Kanye West"
+  },
+  "travis-scott": {
+    "name": "Travis Scott",
+    "quotable_author": "Travis Scott"
+  },
+  "finneas": {
+    "name": "Finneas",
+    "quotable_author": "Finneas"
+  }
+}

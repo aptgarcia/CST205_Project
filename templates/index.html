@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="h3 mb-3">Pick a celebrity to find a random song quote(hopefully)</h1>
+<p class="text-muted">
+  Click on an artist to see random lyric lines from one of their songs (via Genius).
+</p>
+
+<div class="row g-3 mt-3">
+
+  <div class="col-6 col-md-3">
+    <a href="/celebrity/taylor-swift" class="text-decoration-none">
+      <div class="card text-center shadow-sm p-3">
+        <h2 class="h5 mb-0">Taylor Swift</h2>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <a href="/celebrity/kanye-west" class="text-decoration-none">
+      <div class="card text-center shadow-sm p-3">
+        <h2 class="h5 mb-0">Kanye West</h2>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <a href="/celebrity/travis-scott" class="text-decoration-none">
+      <div class="card text-center shadow-sm p-3">
+        <h2 class="h5 mb-0">Travis Scott</h2>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <a href="/celebrity/finneas" class="text-decoration-none">
+      <div class="card text-center shadow-sm p-3">
+        <h2 class="h5 mb-0">Finneas</h2>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+{% endblock %}

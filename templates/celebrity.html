@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row g-4 align-items-start">
+
+  <!--need to add each hardcoded image .jpg/png into the CST205_Project/static/img folder --> 
+  <div class="col-md-4 text-center">
+
+    {% if celeb.name == "Taylor Swift" %}
+      <img src="{{ url_for('static', filename='img/taylor.png') }}"
+           class="img-fluid rounded shadow mb-3">
+
+    {% elif celeb.name == "Kanye West" %}
+      <img src="{{ url_for('static', filename='img/kanye.png') }}"
+           class="img-fluid rounded shadow mb-3">
+
+    {% elif celeb.name == "Travis Scott" %}
+      <img src="{{ url_for('static', filename='img/travis.png') }}"
+           class="img-fluid rounded shadow mb-3">
+
+    {% elif celeb.name == "Finneas" %}
+      <img src="{{ url_for('static', filename='img/finneas.png') }}"
+           class="img-fluid rounded shadow mb-3">
+
+    {% endif %}
+  </div>
+
+  <div class="col-md-8">
+    <h1 class="h3 mb-3">{{ celeb.name }}</h1>
+
+    <figure>
+      <blockquote class="blockquote" id="quote-text">
+        {{ quote.content|safe }}
+      </blockquote>
+      <figcaption class="blockquote-footer" id="quote-author">
+        {{ quote.author }}
+        {% if quote.song %}
+          — from “{{ quote.song }}”
+        {% endif %}
+        {% if quote.url %}
+          — <a href="{{ quote.url }}" target="_blank" rel="noopener">View on Genius</a>
+        {% endif %}
+      </figcaption>
+    </figure>
+
+    <div class="d-flex gap-2 mt-3">
+      <button id="btn-new" class="btn btn-primary" data-slug="{{ request.view_args.slug }}">
+        New Quote
+      </button>
+      <a class="btn btn-outline-dark" href="/">Back</a>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

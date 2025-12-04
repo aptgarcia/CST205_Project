@@ -3,11 +3,13 @@ import requests
 import random
 import json
 from pathlib import Path
-from bs4 import BeautifulSoup  # python -m pip install  beautifulsoup4 into your venv before running
+from bs4 import BeautifulSoup  #python -m pip install  beautifulsoup4 into your venv before running
+from jinja2 import TemplateNotFound
+
 
 app = Flask(__name__)
 
-# === Load celebrity data from JSON ===
+#Load celebrity data from JSON
 ROOT = Path(__file__).parent
 with open(ROOT / "celebrities.json", "r", encoding="utf-8") as f:
     CELEBS = json.load(f)
@@ -16,7 +18,7 @@ GENIUS_API_URL = "https://api.genius.com"
 GENIUS_TOKEN = "ZIAi4fLqPeoMefSqzipUPYK9ryLD-wbcN81CvWy9m4xbKzDlXB7SAx4QPJ9VwbRO"
 
 
-def genius_get(path, **params):  # using genius API examples
+def genius_get(path, **params):  #using genius API examples
     headers = {"Authorization": f"Bearer {GENIUS_TOKEN}"}
     resp = requests.get(f"{GENIUS_API_URL}{path}", headers=headers, params=params, timeout=10)
     resp.raise_for_status()
@@ -49,18 +51,16 @@ def get_artist_songs(artist_id: int, pages: int = 3):
             for s in part:
                 primary = s.get("primary_artist") or {}
                 if primary.get("id") == artist_id:
-                    #Only keep true primary-artist songs
+                    # Only keep true primary-artist songs
                     songs.append(s)
         except Exception:
             break
     return songs
 
 
-
 def scrape_two_lyric_lines(song_url: str): 
     #Extract two consecutive lyric lines from the actual song lyrics only.
-    #Uses Genius lyric containers (<div data-lyrics-container="true">)
-    #Skips section headers like [Chorus], [Verse 1], and very short filler lines.
+    #Uses Genius lyric containers (<div data-lyrics-container="true">) Skips section headers like [Chorus], [Verse 1], and very short filler lines.
     try:
         #Step 1: request the Genius song webpage
         #The "User-Agent" makes our request look like a normal browser, so Genius will return the real lyrics page instead of blocking us.
@@ -76,7 +76,7 @@ def scrape_two_lyric_lines(song_url: str):
         #Convert the HTML into a structured format so we can search it
         soup = BeautifulSoup(page.text, "html.parser")
 
-        #Fetch only the lyric containers (avoids the 'About' panel and other sidebar text)
+        #Fetch only the lyric containers (avoids the 'About' panel and other sidebar text which was a reocurring problem previously)
         containers = soup.select('div[data-lyrics-container="true"]')
         if not containers:
             print("No lyric containers found")
@@ -148,7 +148,7 @@ def fetch_song_quote(artist_name: str) -> dict:
         elif line1:
             content = line1
         else:
-            content = f"A line from “{song_title}”." #sometimes it defaults to this for some songs
+            content = f"A line from “{song_title}”."  #sometimes it defaults to this for some songs
 
         return {
             "content": content,
@@ -171,8 +171,18 @@ def celebrity(slug):
     celeb = CELEBS.get(slug)
     if not celeb:
         abort(404)
-    quote = fetch_song_quote(celeb["quotable_author"])
-    return render_template("celebrity.html", celeb=celeb, quote=quote)
+
+    quote = fetch_song_quote(celeb["genius_artist"])
+
+    #Look for a per-celebrity template first (ex: "joji.html")
+    template_name = f"{slug}.html"
+
+    try:
+        return render_template(template_name, celeb=celeb, quote=quote, slug=slug)
+    except TemplateNotFound:
+        # use generic "celebrity.html" template if the slug-specific one doesn't exist for that artist
+        return render_template("celebrity.html", celeb=celeb, quote=quote, slug=slug)
+
 
 
 @app.route("/api/quote/<slug>")
@@ -180,7 +190,8 @@ def api_quote(slug):
     celeb = CELEBS.get(slug)
     if not celeb:
         return jsonify({"ok": False}), 404
-    q = fetch_song_quote(celeb["quotable_author"])
+    
+    q = fetch_song_quote(celeb["genius_artist"])
     return jsonify({"ok": True, "quote": q})
 
 

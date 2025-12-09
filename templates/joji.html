@@ -1,75 +1,115 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!--  Keep/do not change anything above this line -->
-
-  <!--  JOJI IMAGE SECTION -->
-  <!-- You CAN change:m-->
-  <!--   - image file name in filename='img/joji.png' -->
-  <!--   - classes (img-fluid, rounded, shadow) -->
-  <!--   - style max-width, margins, etc. -->
-  <!-- You MUST keep url_for('static', ...) so Flask can find file. -->
-  <div class="text-center mb-4">
-    <img
-      src="{{ url_for('static', filename='img/joji.png') }}"
-      alt="Joji"
-      class="img-fluid rounded shadow"
-      style="max-width: 300px;">
-  </div>
+<!-- ========================================================= -->
+<!-- DO NOT CHANGE ANYTHING ABOVE THIS LINE                    -->
+<!-- ========================================================= -->
 
 
-  <!--    CELEBRITY NAME                                             -->
-  <!-- CAN change: -->
-  <!--   - h1/h2/h3 level -->
-  <!--   - classes (text-center, text-primary, etc.) -->
-  <!-- KEEP {{ celeb.name }} so the name shows correctly. -->
-  <h1 class="h3 text-center">{{ celeb.name }}</h1>
+<!-- ========================================================= -->
+<!-- 🔊 TTS VOICE SELECTION (JOJI USES DAVID)                  -->
+<!-- This tells app.js which voice to use on this page.        -->
+<!-- MUST keep window.preferredVoiceName EXACTLY spelled.      -->
+<!-- You may change the value for other celebrity pages.       -->
+<!-- ========================================================= -->
+<script>
+  window.preferredVoiceName = "Microsoft David - English (United States)";
+</script>
 
 
-  <!-- QUOTE DISPLAY -->
-  <!-- CAN change: -->
-  <!--   - classes, margins, alignment -->
-  <!-- Do not change: -->
-  <!--   - id="quote-text" -->
-  <!--   - id="quote-author" -->
-  <!--   - {{ quote.content|safe }} -->
-  <!--   - {{ quote.author }} -->
-  <!--   - the song/url blocks if you want that info shown -->
-  <!-- app.js depends on these IDs and variables. -->
-  <figure class="mt-3">
-    <blockquote class="blockquote text-center" id="quote-text">
-      {{ quote.content|safe }}
-    </blockquote>
 
-    <figcaption class="blockquote-footer text-center" id="quote-author">
-      {{ quote.author }}
-      {% if quote.song %}
-        — from “{{ quote.song }}”
-      {% endif %}
-      {% if quote.url %}
-        — <a href="{{ quote.url }}" target="_blank">View on Genius</a>
-      {% endif %}
-    </figcaption>
-  </figure>
+<!-- ========================================================= -->
+<!-- 🎤 JOJI IMAGE SECTION                                      -->
+<!-- You CAN change:                                            -->
+<!--  - image filename                                          -->
+<!--  - CSS classes & styles                                    -->
+<!-- You MUST keep url_for('static', ...)                       -->
+<!-- ========================================================= -->
+<div class="text-center mb-4">
+  <img
+    src="{{ url_for('static', filename='img/joji.png') }}"
+    alt="Joji"
+    class="img-fluid rounded shadow"
+    style="max-width: 300px;">
+</div>
 
-  <!-- BUTTONS SECTION -->
-  <!-- CAN change after it says "class= ":-->
-  <!--   - button colors, button text, layout (center, left, etc.) -->
-  <!-- KEEP: -->
-  <!--   - id="btn-new" -->
-  <!--   - data-slug="{{ slug }}" -->
-  <!-- Because app.js uses those for fetching new quotes. -->
-  <div class="d-flex justify-content-center gap-3 mt-4">
-    <button
-      id="btn-new"
-      class="btn btn-primary"
-      data-slug="{{ slug }}">
-      New Quote
-    </button>
 
-    <!-- Back button: text/classes can change, but href="/" sends users home -->
-    <a href="/" class="btn btn-outline-dark">Back</a>
-  </div>
 
-  <!--  Keep/do not change anything below this line -->
+<!-- ========================================================= -->
+<!-- 🎵 CELEBRITY NAME                                          -->
+<!-- You CAN change: styling & HTML tags                        -->
+<!-- You MUST KEEP celeb.name variable                          -->
+<!-- ========================================================= -->
+<h1 class="h3 text-center">{{ celeb.name }}</h1>
+
+
+
+<!-- ========================================================= -->
+<!-- 🎶 QUOTE DISPLAY AREA                                      -->
+<!-- You CAN change: styles, layout, colors                     -->
+<!-- YOU MUST KEEP:                                             -->
+<!--   - id="quote-text"  (app.js updates lyrics here)          -->
+<!--   - id="quote-author" (app.js updates footer here)         -->
+<!--   - the quote variables (quote.content, quote.author,      -->
+<!--     quote.song, quote.url)                                 -->
+<!-- ========================================================= -->
+<figure class="mt-3">
+
+  <!-- LYRICS -->
+  <blockquote class="blockquote text-center" id="quote-text">
+    {{ quote.content|safe }}
+  </blockquote>
+
+  <!-- AUTHOR + SONG + GENIUS LINK -->
+  <figcaption class="blockquote-footer text-center" id="quote-author">
+    {{ quote.author }}
+    {% if quote.song %}
+      — from “{{ quote.song }}”
+    {% endif %}
+    {% if quote.url %}
+      — <a href="{{ quote.url }}" target="_blank">View on Genius</a>
+    {% endif %}
+  </figcaption>
+
+</figure>
+
+
+
+<!-- ========================================================= -->
+<!-- 🎛 BUTTONS                                                 -->
+<!-- You CAN change:                                            -->
+<!--    button colors, text, layout                             -->
+<!-- YOU MUST KEEP:                                             -->
+<!--    id="btn-new"                                            -->
+<!--    data-slug="{{ slug }}"                                  -->
+<!--    id="btn-tts"                                            -->
+<!-- These IDs are REQUIRED for app.js to work.                 -->
+<!-- ========================================================= -->
+<div class="d-flex justify-content-center gap-3 mt-4">
+
+  <!-- NEW QUOTE BUTTON -->
+  <button
+    id="btn-new"
+    class="btn btn-primary"
+    data-slug="{{ slug }}">
+    New Quote
+  </button>
+
+  <!-- SPEAK BUTTON (TTS) -->
+  <button
+    id="btn-tts"
+    class="btn btn-secondary">
+    🔊 Speak
+  </button>
+
+  <!-- BACK BUTTON -->
+  <a href="/" class="btn btn-outline-dark">Back</a>
+
+</div>
+
+
+
+<!-- ========================================================= -->
+<!-- DO NOT CHANGE ANYTHING BELOW THIS LINE                     -->
+<!-- ========================================================= -->
 {% endblock %}

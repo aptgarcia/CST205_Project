@@ -1,0 +1,245 @@
+/* ===== Genius-ish Bright Theme (Navbar + Index) ===== */
+:root {
+  --g-yellow: #ffdd33;
+  --g-black: #111111;
+  --g-darkgrey: #222222;
+  --g-lightgrey: #f5f5f5;
+  --g-muted: #777777;
+  --g-border: #e2e2e2;
+}
+
+/* Global font */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ========================= */
+/* NAVBAR (applies everywhere) */
+/* ========================= */
+
+.genius-navbar {
+  background-color: var(--g-yellow);
+  border-bottom: 3px solid var(--g-black);
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+}
+
+.genius-brand {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  color: var(--g-black) !important;
+}
+
+/* Base pill style */
+.brand-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background-color: var(--g-black);
+  color: var(--g-yellow);
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+/* Wider pill specifically for "Genius API" text */
+.brand-pill-wide {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.75rem;
+}
+
+/* Brand text next to pill */
+.brand-text {
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+/* ========================= */
+/* INDEX PAGE ONLY (home-page) */
+/* ========================= */
+
+body.home-page {
+  background-color: var(--g-lightgrey);
+  color: var(--g-black);
+}
+
+/* Header text on index */
+body.home-page .page-title {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: var(--g-muted);
+  letter-spacing: 0.16em;
+}
+
+body.home-page .display-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* Artist cards */
+body.home-page .artist-card {
+  background-color: #ffffff;
+  border-radius: 0.9rem;
+  border: 2px solid var(--g-border);
+  overflow: hidden;
+  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
+    border-color 0.12s ease-out;
+}
+
+body.home-page .artist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
+  border-color: var(--g-yellow);
+}
+
+/* Card image */
+body.home-page .artist-card img {
+  object-fit: cover;
+  height: 190px;
+}
+
+/* Card body spacing */
+body.home-page .artist-card .card-body {
+  padding: 0.9rem 1rem 1rem;
+}
+
+/* Genre tag */
+body.home-page .artist-genre-tag {
+  display: inline-block;
+  background-color: var(--g-black);
+  color: var(--g-yellow);
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  letter-spacing: 0.12em;
+}
+
+/* Artist title + description */
+body.home-page .artist-name {
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--g-black);
+}
+
+body.home-page .artist-desc {
+  font-size: 0.85rem;
+  color: var(--g-muted);
+}
+
+/* CTA */
+body.home-page .artist-cta {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--g-black);
+}
+
+/* Footer on index */
+body.home-page .index-footer {
+  color: var(--g-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--g-border);
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* ========================================= */
+/* JOJI PAGE — DARK / GRUNGY COLLAGE + VERTICAL DRIFT */
+/* ========================================= */
+
+body.joji-page {
+  min-height: 100vh;
+  position: relative;
+  color: #000000;        /* ALL text black */
+  overflow-x: hidden;
+}
+
+/* Collage background (vertical drift loop) */
+body.joji-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+
+  background-image: url("/static/img/joji_bg.jpg");
+  background-repeat: repeat;
+  background-size: 700px auto;
+  background-position: center 0;
+  opacity: 0.65;
+  filter: blur(2px) brightness(0.8) saturate(1.1);
+
+  /* Vertical downwards drift */
+  animation: jojiDrift 50s linear infinite;
+}
+
+/* Dark overlay to enhance contrast */
+body.joji-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 12, 18, 0.55); 
+  z-index: -1;
+}
+
+/* TEXT — pure bold black, no shadows */
+body.joji-page h1,
+body.joji-page .blockquote,
+body.joji-page .blockquote-footer {
+  color: #000000;        /* PURE BLACK text */
+  font-weight: 800;      /* extra bold */
+  text-shadow: none !important; /* remove all halos */
+}
+
+/* ============================== */
+/* BUTTONS — dark unified theme   */
+/* ============================== */
+
+body.joji-page #btn-new,
+body.joji-page #btn-tts {
+  background-color: #d3d3d3; 
+  border-color: #bcbcbc;
+  color: #000000 !important;     /* BLACK TEXT */
+  font-weight: 800;              /* bold */
+  border-radius: 8px;
+  padding: 0.55rem 1.2rem;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.45);
+}
+
+body.joji-page #btn-new:hover,
+body.joji-page #btn-tts:hover {
+  background-color: #c6c6c6;
+  border-color: #b0b0b0;
+}
+
+/* Back button — black outline + bold black text */
+body.joji-page a.btn-outline-dark {
+  border-color: #000 !important;
+  color: #000 !important;
+  font-weight: 800;
+  border-radius: 8px;
+  padding: 0.55rem 1.2rem;
+  box-shadow: none;
+}
+
+body.joji-page a.btn-outline-dark:hover {
+  background-color: rgba(0,0,0,0.12);
+  color: #000 !important;
+}
+
+/* Vertical drifting animation */
+@keyframes jojiDrift {
+  from { background-position: center 0px; }
+  to   { background-position: center 400px; }
+}

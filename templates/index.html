@@ -1,46 +1,108 @@
 {% extends 'base.html' %}
+
+{% block body_class %}home-page{% endblock %}
+
 {% block content %}
 
-<h1 class="h3 mb-3">Pick a celebrity to find a random song quote(hopefully)</h1>
-<p class="text-muted">
-  Click on an artist to see random lyric lines from one of their songs (via Genius).
-</p>
+<!-- Header -->
+<section class="mb-4">
+  <span class="page-title">Home</span>
+  <h1 class="display-title mt-1 mb-2">Genius Artists</h1>
 
-<div class="row g-3 mt-3">
+  <p class="text-muted">
+    Generate random lyric quotes from your favorite artists. Click an artist card to get started.
+  </p>
+</section>
 
-  <div class="col-6 col-md-3">
-    <a href="/celebrity/taylor-swift" class="text-decoration-none">
-      <div class="card text-center shadow-sm p-3">
-        <h2 class="h5 mb-0">Taylor Swift</h2>
+<!-- Artist Grid -->
+<div class="row g-4">
+
+  <!-- Taylor Swift -->
+  <div class="col-12 col-sm-6 col-lg-3">
+    <a href="/celebrity/taylor-swift" class="text-decoration-none text-reset">
+      <div class="artist-card h-100">
+        <img
+          src="{{ url_for('static', filename='img/taylor.png') }}"
+          class="w-100"
+          alt="Taylor Swift"
+        >
+        <div class="card-body">
+          <span class="artist-genre-tag">POP</span>
+          <div class="artist-name mt-2">Taylor Swift</div>
+          <p class="artist-desc">Storytelling, hooks, and emotional detail.</p>
+          <span class="artist-cta">View quotes →</span>
+        </div>
       </div>
     </a>
   </div>
 
-  <div class="col-6 col-md-3">
-    <a href="/celebrity/joji" class="text-decoration-none">
-      <div class="card text-center shadow-sm p-3">
-        <h2 class="h5 mb-0">Joji</h2>
+  <!-- Joji -->
+  <div class="col-12 col-sm-6 col-lg-3">
+    <a href="/celebrity/joji" class="text-decoration-none text-reset">
+      <div class="artist-card h-100">
+        <img
+          src="{{ url_for('static', filename='img/joji.jpeg') }}"
+          class="w-100"
+          alt="Joji"
+        >
+        <div class="card-body">
+          <span class="artist-genre-tag">ALT R&amp;B</span>
+          <div class="artist-name mt-2">Joji</div>
+          <p class="artist-desc">Dreamy, melancholic, late-night vibes.</p>
+          <span class="artist-cta">View quotes →</span>
+        </div>
       </div>
     </a>
   </div>
 
-
-  <div class="col-6 col-md-3">
-    <a href="/celebrity/travis-scott" class="text-decoration-none">
-      <div class="card text-center shadow-sm p-3">
-        <h2 class="h5 mb-0">Travis Scott</h2>
+  <!-- Travis Scott -->
+  <div class="col-12 col-sm-6 col-lg-3">
+    <a href="/celebrity/travis-scott" class="text-decoration-none text-reset">
+      <div class="artist-card h-100">
+        <img
+          src="{{ url_for('static', filename='img/travis-scott.jpeg') }}"
+          class="w-100"
+          alt="Travis Scott"
+        >
+        <div class="card-body">
+          <span class="artist-genre-tag">TRAP</span>
+          <div class="artist-name mt-2">Travis Scott</div>
+          <p class="artist-desc">Atmospheric trap, energy, ad-libs.</p>
+          <span class="artist-cta">View quotes →</span>
+        </div>
       </div>
     </a>
   </div>
 
-  <div class="col-6 col-md-3">
-    <a href="/celebrity/finneas" class="text-decoration-none">
-      <div class="card text-center shadow-sm p-3">
-        <h2 class="h5 mb-0">Finneas</h2>
+  <!-- Finneas -->
+  <div class="col-12 col-sm-6 col-lg-3">
+    <a href="/celebrity/finneas" class="text-decoration-none text-reset">
+      <div class="artist-card h-100">
+        <img
+          src="{{ url_for('static', filename='img/finneas.png') }}"
+          class="w-100"
+          alt="Finneas"
+        >
+        <div class="card-body">
+          <span class="artist-genre-tag">ALT POP</span>
+          <div class="artist-name mt-2">Finneas</div>
+          <p class="artist-desc">Minimalist, emotional, clever production.</p>
+          <span class="artist-cta">View quotes →</span>
+        </div>
       </div>
     </a>
   </div>
 
 </div>
+
+<!-- Footer -->
+<section class="index-footer mt-5 text-center">
+  <p>
+    Each quote is pulled using the Genius API to find the Genius URL and webscraping with BeautifulSoup to find lyrics.
+  </p>
+  <p>
+    Use <strong>New Quote</strong> to refresh the lyrics &amp; <strong>Speak</strong> on an artist page for a fun browser-side TTS.
+  </p>
+</section>
 
 {% endblock %}

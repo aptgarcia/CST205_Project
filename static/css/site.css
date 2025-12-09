@@ -155,6 +155,14 @@ body.home-page .index-footer {
   margin-top: 2rem;
 }
 
+/* Ensure Taylor Swift's face is visible by cropping from the top */
+body.home-page .artist-card-top img {
+  object-fit: cover;
+  object-position: top center;  /* pull image upward */
+  height: 190px;                /* same height as other cards */
+}
+
+
 /* ========================================= */
 /* JOJI PAGE — DARK / GRUNGY COLLAGE + VERTICAL DRIFT */
 /* ========================================= */

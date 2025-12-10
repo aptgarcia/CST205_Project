@@ -13,14 +13,42 @@
   <!--   - classes (img-fluid, rounded, shadow) -->
   <!--   - style max-width, margins, etc. -->
   <!-- You MUST keep url_for('static', ...) so Flask can find file. -->
-  <div class="text-center mb-4">
-    <img
-      src="{{ url_for('static', filename='img/taylor.png') }}"
-      alt="Taylor Swift"
-      class="img-fluid rounded shadow"
-      style="max-width: 300px;">
+<div style="display:flex; justify-content:center; align-items:center; gap:40px; margin-bottom:20px;">
+
+    <!-- top albums -->
+    <div style="font-family:Georgia,serif; color:#4a4a48; font-size:0.9rem;">
+        <strong style="font-size:1.2rem;">Top Albums</strong>
+        <ul style="padding-left:18px; margin:6px 0;">
+            <li>folklore</li>
+            <li>evermore</li>
+            <li>1989 (Taylor's Version)</li>
+            <li>Red (Taylor's Version)</li>
+            <li>Midnights</li>
+        </ul>
+    </div>
+    <!-- image -->
+    <div>
+        <img
+        src="{{ url_for('static', filename='img/taylor.png') }}"
+        alt="Taylor Swift"
+        class="img-fluid rounded shadow"
+        style="max-width: 300px;">
+    </div>
+    <!-- top songs -->
+    <div style="font-family:Georgia,serif; color:#4a4a48; font-size:0.9rem;">
+        <strong style="font-size:1.2rem;">Top Songs</strong>
+        <ul style="padding-left:18px; margin:6px 0;">
+            <li>cardigan</li>
+            <li>august</li>
+            <li>willow</li>
+            <li>All Too Well (10 Minute Version)</li>
+            <li>Cruel Summer</li>
+        </ul>
+    </div>
+
   </div>
-  
+
+  </div>
 
   <!--    CELEBRITY NAME                                             -->
   <!-- CAN change: -->

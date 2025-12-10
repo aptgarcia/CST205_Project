@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!--  Keep/do not change anything above this line -->
+<style>
+  body { background-color: tan; }
+</style>
+
+<!--  FINNEAS IMAGE SECTION -->
+<div class="text-center mb-4">
+  <img
+    src="{{ url_for('static', filename='img/finneas2019.png') }}"
+    alt="Finneas"
+    class="img-fluid rounded shadow"
+    style="max-width: 300px;">
+</div>
+
+<!-- CELEBRITY NAME -->
+<h1 class="h1 text-center"
+    style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold;">
+  {{ celeb.name | upper }}
+</h1>
+
+<!-- QUOTE DISPLAY -->
+<figure class="mt-3">
+  <blockquote class="blockquote text-center" id="quote-text"
+              style="font-family: Georgia, 'Times New Roman', Times, serif">
+    {{ quote.content|safe }}
+  </blockquote>
+
+  <figcaption class="blockquote-footer text-center" id="quote-author">
+    {{ quote.author }}
+    {% if quote.song %}
+      — from “{{ quote.song }}”
+    {% endif %}
+    {% if quote.url %}
+      — <a href="{{ quote.url }}" target="_blank">View on Genius</a>
+    {% endif %}
+  </figcaption>
+</figure>
+
+<!-- BUTTONS SECTION -->
+<div class="d-flex justify-content-center gap-3 mt-4">
+  <button
+    id="btn-new"
+    class="btn btn-primary"
+    data-slug="{{ slug }}"
+    style="font-family: Georgia, 'Times New Roman', Times, serif;
+           font-weight: bold;
+           background-color: #70480f;
+           background: #472e09;">
+    New Quote
+  </button>
+
+  <!-- SPEAK BUTTON (TTS) -->
+  <button
+    id="btn-tts"
+    class="btn btn-secondary"
+    style="font-family: Georgia, 'Times New Roman', Times, serif;
+           font-weight: bold;">
+    🔊 Speak
+  </button>
+
+  <!-- Back button -->
+  <a href="/" class="btn btn-outline-dark"
+     style="font-family: Georgia, 'Times New Roman', Times, serif;">
+    Back
+  </a>
+</div>
+<!--  Keep/do not change anything below this line -->
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  // Preferred TTS voice for Finneas
+  window.preferredVoiceName = "Microsoft David - English (United States)";
+</script>
+{% endblock %}

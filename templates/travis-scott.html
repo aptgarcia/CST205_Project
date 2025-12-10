@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!--  Keep/do not change anything above this line -->
+  <!--  JOJI IMAGE SECTION -->
+  <!-- You CAN change:m-->
+  <!--   - image file name in filename='img/joji.png' -->
+  <!--   - classes (img-fluid, rounded, shadow) -->
+  <!--   - style max-width, margins, etc. -->
+  <!-- You MUST keep url_for('static', ...) so Flask can find file. -->
+  <div class="text-center mb-4">
+    <img
+      src="{{ url_for('static', filename='img/travis1.webp')  }}"
+      alt="Travis"
+      class="img-fluid rounded shadow"
+      style="max-width: 300px;">
+
+    <img
+      src="{{ url_for('static', filename='img/travis2.jpeg') }}"
+      alt="Travis"
+      class="img-fluid rounded shadow"
+      style="max-width: 300px;"> 
+
+    <img
+      src="{{ url_for('static', filename='img/travis3.jpg') }}"
+      alt="Travis"
+      class="img-fluid rounded shadow"
+      style="max-width: 300px;"> 
+  </div>
+
+
+  <!--    CELEBRITY NAME                                             -->
+  <!-- CAN change: -->
+  <!--   - h1/h2/h3 level -->
+  <!--   - classes (text-center, text-primary, etc.) -->
+  <!-- KEEP {{ celeb.name }} so the name shows correctly. -->
+  <h1 class="h3 text-center">{{ celeb.name }}</h1>
+
+
+  <!-- QUOTE DISPLAY -->
+  <!-- CAN change: -->
+  <!--   - classes, margins, alignment -->
+  <!-- Do not change: -->
+  <!--   - id="quote-text" -->
+  <!--   - id="quote-author" -->
+  <!--   - {{ quote.content|safe }} -->
+  <!--   - {{ quote.author }} -->
+  <!--   - the song/url blocks if you want that info shown -->
+  <!-- app.js depends on these IDs and variables. -->
+  <figure class="mt-3 mb-4">
+    <blockquote class="blockquote text-center" id="quote-text">
+      {{ quote.content|safe }}
+    </blockquote>
+
+    <figcaption class="blockquote-footer text-center" id="quote-author">
+      {{ quote.author }}
+      {% if quote.song %}
+        — from “{{ quote.song }}”
+      {% endif %}
+      {% if quote.url %}
+        — <a href="{{ quote.url }}" target="_blank">View on Genius</a>
+      {% endif %}
+    </figcaption>
+  </figure>
+
+  <!-- BUTTONS SECTION -->
+  <!-- CAN change after it says "class= ":-->
+  <!--   - button colors, button text, layout (center, left, etc.) -->
+  <!-- KEEP: -->
+  <!--   - id="btn-new" -->
+  <!--   - data-slug="{{ slug }}" -->
+  <!-- Because app.js uses those for fetching new quotes. -->
+  <div class="d-flex justify-content-center gap-3 mt-4">
+    <button
+      id="btn-new"
+      style="background-color: blueviolet;"
+      class="btn btn-primary"
+      data-slug="{{ slug }}">
+      New Quote
+    </button>
+
+    <!-- Back button: text/classes can change, but href="/" sends users home -->
+    <a href="/" class="btn btn-outline-dark">Back</a>
+  </div>
+
+  <!--(In case we want to add an about section)-->
+  <!--
+  <div class="text-center mt-4 rounded mx-auto" style="background-color: blueviolet; max-width: 600px;" >
+    <h1 style="color: white;"><b>ABOUT</b></h1>
+    <p style="color: white;">Placeholder paragraph</p>
+  </div>
+  -->
+
+  <!--  Keep/do not change anything below this line -->
+{% endblock %}
